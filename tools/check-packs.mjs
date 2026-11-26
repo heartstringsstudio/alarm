@@ -30,6 +30,12 @@ for (const entry of index.packs || []) {
     if (!exists(`${dir}/${audio}`)) warnings.push(`${dir}: missing narration ${audio} (${v.r}) — the phone's built-in voice will read it instead`);
   });
   for (const [k, img] of Object.entries(p.images || {})) if (!exists(`${dir}/${img}`)) errors.push(`${dir}: image "${k}" not found at ${img}`);
+  for (const x of p.seasons || []) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(x.date || '')) errors.push(`${dir}: season "${x.theme}" has a bad date`);
+    if (x.theme && !['advent', 'gaudete', 'christmas'].includes(x.theme)) errors.push(`${dir}: season theme "${x.theme}" must be advent, gaudete or christmas`);
+  }
+  if (p.wreath && (p.milestones || []).length < 5) errors.push(`${dir}: "wreath" needs 5 milestones (4 Advent Sundays + Christmas Day)`);
+  p.verses.forEach((v, i) => { if (v.antiphon && !v.antiphon.t) errors.push(`${dir}: verse ${i + 1} antiphon needs a "t" (title)`); });
   for (const m of p.milestones || []) if (!/^\d{4}-\d{2}-\d{2}$/.test(m.date || '')) errors.push(`${dir}: milestone "${m.label}" has a bad date`);
   if (p.start) ranges.push({ id: p.id, a: day(p.start), b: day(p.start) + (p.verses.length - 1) * 864e5 });
 }

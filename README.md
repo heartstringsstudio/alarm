@@ -33,6 +33,14 @@ locks itself, set Auto-Lock to *Never* for the night.)
 6. Check it: `node tools/check-packs.mjs` (also runs automatically before publishing).
 7. Commit and push to `main`. Done — phones get it on next open.
 
+### Church-year extras (optional, see `packs/2026-advent/pack.json`)
+- `seasons` — `[{ "date", "theme", "pill"?, "headline"?, "headlineEm"?, "ringLine"? }]`. From each date on,
+  the app switches colours (`advent` violet, `gaudete` rose, `christmas` white & gold) and can swap the
+  pill, headline and the line under "Good morning" on the wake-up screen. No `seasons` = the default green.
+- `wreath: true` — shows an Advent wreath; milestones 1–4 are the Sunday candles (3rd is rose), 5 is the Christ candle.
+- `antiphon` on a verse — `{ "t": "O Dayspring", "l": "O Dayspring, brightness of…" }`, shown above the verse
+  (used for the O Antiphons, Dec 17–23). Visual only; the narration is unchanged.
+
 Rules: always a **new folder** per month (never overwrite old file names — phones cache
 them), and don't overlap dates. If a new pack is late, the newest pack repeats from the top.
 
