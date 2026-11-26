@@ -15,10 +15,24 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="Verse Alarm"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="app.css?v=1.1.0"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Cormorant+SC:wght@600;700&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css?v=1.2.0"/>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-star" viewBox="4 0 24 29"><polygon points="16.00,2.00 16.65,10.43 18.55,9.45 17.57,11.35 24.00,12.00 17.57,12.65 18.55,14.55 16.65,13.57 16.00,27.00 15.35,13.57 13.45,14.55 14.43,12.65 8.00,12.00 14.43,11.35 13.45,9.45 15.35,10.43" fill="currentColor"/></symbol>
+  <symbol id="i-speaker" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9a3.5 3.5 0 0 1 0 6"/><path d="M18.5 6.5a7 7 0 0 1 0 11"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15L6 16z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v5h-5"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></symbol>
+  <symbol id="i-sunrise" viewBox="0 0 24 24"><path d="M3 18h18"/><path d="M7 18a5 5 0 0 1 10 0"/><path d="M12 6v3"/><path d="M5 10.5l2 1.5"/><path d="M19 10.5l-2 1.5"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6.5" y="6.5" width="11" height="11" rx="1.5" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-candle" viewBox="0 0 24 24"><rect x="9" y="10" width="6" height="11" rx="1"/><path d="M12 3c2 2.5 2 4.2 0 5.5-2-1.3-2-3 0-5.5z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 6v12"/><path d="M15 6v12"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 4l9 16H3z"/><path d="M12 10v4"/><path d="M12 17v.01"/></symbol>
+</svg>
 <div class="wrap">
 
   <!-- HERO / TODAY -->
@@ -26,20 +40,21 @@
     <img class="bg" id="heroImg" src="" alt="">
     <div class="hero-inner">
       <div class="toprow">
-        <span class="pill"><span class="dot"></span> <span id="packPill">Daily Verse Alarm</span></span>
+        <span class="pill"><svg class="star" aria-hidden="true"><use href="#i-star"/></svg> <span id="packPill">Daily Verse Alarm</span></span>
         <div class="clock"><span id="dateLine">—</span><strong id="clockLine">--:--</strong></div>
       </div>
       <h1><span id="headline">Wake up to</span><br><em id="headlineEm">the Word.</em></h1>
       <p class="lead" id="packLead">Loading this month's verses…</p>
 
       <div class="verse-hero" aria-live="polite">
-        <div class="label"><span>✦ Today's verse</span><span id="todayLabel">Today</span></div>
-        <blockquote id="todayText">“…”</blockquote>
+        <div class="label"><span><svg class="ico" aria-hidden="true" style="width:12px;height:12px"><use href="#i-star"/></svg> Today's verse</span><span id="todayLabel">Today</span></div>
+        <div class="antiphon" id="todayAnt" hidden><b></b><span></span></div>
+        <blockquote id="todayText">…</blockquote>
         <cite id="todayRef">—</cite>
         <div class="hero-actions">
-          <button class="btn btn-gold" id="hearTodayBtn">🔊 Hear today's verse</button>
-          <button class="btn btn-white" id="previewBtn">⏰ Preview wake-up</button>
-          <button class="btn btn-outline" id="anotherBtn">↻ Another verse</button>
+          <button class="btn btn-gold" id="hearTodayBtn"><svg class="ico" aria-hidden="true"><use href="#i-speaker"/></svg> Hear today's verse</button>
+          <button class="btn btn-white" id="previewBtn"><svg class="ico" aria-hidden="true"><use href="#i-bell"/></svg> Preview wake-up</button>
+          <button class="btn btn-outline" id="anotherBtn"><svg class="ico" aria-hidden="true"><use href="#i-refresh"/></svg> Another verse</button>
         </div>
       </div>
     </div>
@@ -47,12 +62,12 @@
 
   <!-- INSTALL / UPDATE BANNERS -->
   <div class="banner" id="installBanner">
-    <p id="installText">📲 <b>Put this on your home screen</b> so it opens like an app and works offline.</p>
+    <p id="installText"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg> <b>Put this on your home screen</b> so it opens like an app and works offline.</p>
     <button class="btn btn-dark" id="installBtn" hidden>Install app</button>
     <button class="btn btn-outline" id="installDismiss">Not now</button>
   </div>
   <div class="banner" id="updateBanner">
-    <p>✨ <b>New verses are ready.</b> Tap to load this month's pack.</p>
+    <p><svg class="ico" aria-hidden="true"><use href="#i-star"/></svg> <b>New verses are ready.</b> Tap to load this month's pack.</p>
     <button class="btn btn-dark" id="updateBtn">Refresh</button>
   </div>
 
@@ -90,27 +105,32 @@
           <select id="snoozeSel"><option value="5">5 minutes</option><option value="9" selected>9 minutes</option><option value="10">10 minutes</option><option value="15">15 minutes</option></select>
         </div>
         <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
-          <button class="btn btn-dark" id="testSoundBtn" style="flex:1">▶ Test sound</button>
-          <button class="btn btn-outline" id="stopSoundBtn">■ Stop</button>
+          <button class="btn btn-dark" id="testSoundBtn" style="flex:1"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg> Test sound</button>
+          <button class="btn btn-outline" id="stopSoundBtn"><svg class="ico" aria-hidden="true"><use href="#i-stop"/></svg> Stop</button>
         </div>
       </div>
     </div>
 
-    <div class="status" id="alarmStatus">⏰ <strong>Alarm is ON</strong></div>
+    <div class="status" id="alarmStatus"><svg class="ico" aria-hidden="true"><use href="#i-bell"/></svg> <strong>Alarm is ON</strong></div>
     <div class="bedside-card">
       <p><strong>Bedtime:</strong> plug in your phone, turn the volume up, and start bedside mode. Leave the app open — phones don't let web apps ring once they're closed or locked.</p>
-      <button class="btn btn-gold" id="bedsideBtn">🌙 Start bedside mode</button>
+      <button class="btn btn-gold" id="bedsideBtn"><svg class="ico" aria-hidden="true"><use href="#i-moon"/></svg> Start bedside mode</button>
     </div>
   </section>
+
+  <div class="orn" aria-hidden="true"><svg class="ico"><use href="#i-star"/></svg></div>
 
   <!-- SEASON -->
   <section class="card section">
     <div class="kicker" id="seasonKicker">The month ahead</div>
     <h2 id="seasonTitle">This month's verses</h2>
     <p class="sub" id="seasonSub"></p>
+    <div class="wreath" id="wreath" hidden></div>
     <div class="path" id="seasonPath"></div>
     <div class="week" id="weekRow"></div>
   </section>
+
+  <div class="orn" aria-hidden="true"><svg class="ico"><use href="#i-star"/></svg></div>
 
   <!-- HOW + PHOTOS -->
   <section class="section split">
@@ -133,6 +153,8 @@
     </div>
   </section>
 
+  <div class="orn" aria-hidden="true"><svg class="ico"><use href="#i-star"/></svg></div>
+
   <!-- LIBRARY -->
   <section class="card section">
     <div class="kicker">Verse library</div>
@@ -147,9 +169,11 @@
 
 <!-- BEDSIDE CLOCK -->
 <div class="bedside" id="bedside" role="dialog" aria-label="Bedside clock">
+  <svg class="bflame" viewBox="0 0 28 44" aria-hidden="true"><defs><linearGradient id="bf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF1C4"/><stop offset=".6" stop-color="#F3B54A"/><stop offset="1" stop-color="#C9742A"/></linearGradient></defs><path d="M14 2c7 9 9 16 6 21-2 3-10 3-12 0-3-5-1-12 6-21z" fill="url(#bf)"/><rect x="11" y="28" width="6" height="16" rx="1" fill="#C9B98F" opacity=".5"/></svg>
   <div class="bclock" id="bClock">--:--</div>
   <div class="bnext" id="bNext"></div>
-  <div class="bwarn" id="bWarn">⚠️ This phone may still lock the screen. Set Auto-Lock to “Never” tonight, or keep it plugged in.</div>
+  <div class="bwarn" id="bWarn">This phone may still lock the screen. Set Auto-Lock to “Never” tonight, or keep it plugged in.</div>
+  <div class="bword">“Watchman, what of the night? … The morning cometh.”<cite>Isaiah 21:11–12</cite></div>
   <div class="bhint">Tap anywhere to leave bedside mode · keep the volume up</div>
 </div>
 
@@ -157,16 +181,18 @@
 <div class="overlay" id="ringOverlay" role="dialog" aria-modal="true" aria-label="Alarm ringing">
   <img id="overlayImg" src="" alt="">
   <div class="overlay-inner">
-    <div class="pulse">🕯️</div>
-    <div style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:#FFD88A">Good morning — it's time to wake up</div>
+    <svg class="ringstar" aria-hidden="true"><use href="#i-star"/></svg>
+    <div style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#FFD88A">Good morning</div>
+    <div class="ringline" id="ringLine">Rise, and give thanks.</div>
     <div class="timebig" id="ringTime">6:30 AM</div>
+    <div class="antiphon" id="ringAnt" hidden><b></b><span></span></div>
     <blockquote id="ringText">“…”</blockquote>
     <cite id="ringRef">—</cite>
     <p id="ringStatus" style="opacity:.9;font-size:14.5px;margin:12px 0 0">Playing your chime, then reading today's verse…</p>
     <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px">
-      <button class="btn btn-gold" id="dismissBtn" style="min-height:52px;padding:0 22px;font-size:16px">☀️ I'm awake — Amen</button>
+      <button class="btn btn-gold" id="dismissBtn" style="min-height:52px;padding:0 22px;font-size:16px"><svg class="ico" aria-hidden="true"><use href="#i-sunrise"/></svg> I'm awake — Amen</button>
       <button class="btn btn-white" id="snoozeBtn" style="min-height:52px">Snooze <span id="snoozeLabel">9</span> min</button>
-      <button class="btn btn-ghost" id="replayBtn" style="min-height:52px">↻ Hear verse again</button>
+      <button class="btn btn-ghost" id="replayBtn" style="min-height:52px"><svg class="ico" aria-hidden="true"><use href="#i-refresh"/></svg> Hear verse again</button>
     </div>
   </div>
 </div>
@@ -175,6 +201,6 @@
 <audio id="chimeAudio" preload="auto"></audio>
 <audio id="verseAudio" preload="auto"></audio>
 
-<script src="app.js?v=1.1.0"></script>
+<script src="app.js?v=1.2.0"></script>
 </body>
 </html>

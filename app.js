@@ -5,9 +5,10 @@
 (function(){
 'use strict';
 
-var APP_VERSION='1.1.0';
+var APP_VERSION='1.2.0';
 var $=function(id){return document.getElementById(id);};
 var DAY=86400000;
+function ico(n){ return '<svg class="ico" aria-hidden="true"><use href="#i-'+n+'"/></svg>'; }
 
 /* ---------- Storage (safe in private mode) ---------- */
 var store={
@@ -66,7 +67,7 @@ function toast(msg){ var t=$('toast'); t.textContent=msg; t.classList.add('show'
 /* ---------- Audio ---------- */
 var verseAudio=$('verseAudio'), speaking=false;
 var libPlayingBtn=null, libPlayingV=null;
-function setLibBtn(btn,on){ btn.textContent=on?'■':'▶'; btn.setAttribute('aria-label',on?'Stop this verse':'Hear this verse'); btn.classList.toggle('playing',on); }
+function setLibBtn(btn,on){ btn.innerHTML=ico(on?'stop':'play'); btn.setAttribute('aria-label',on?'Stop this verse':'Hear this verse'); btn.classList.toggle('playing',on); }
 function resetLibBtn(){ if(libPlayingBtn){ setLibBtn(libPlayingBtn,false); libPlayingBtn=null; libPlayingV=null; } }
 /* Wake-up sounds. `lead` = seconds before the verse starts (the sound
    fades out underneath). Add a sound: drop an MP3 in sounds/, add a line
@@ -193,10 +194,10 @@ function whenWord(d){
 }
 function updateStatus(){
   var el=$('alarmStatus');
-  if(!S.on){ el.innerHTML='⏸️ <strong>Alarm is OFF</strong> — flip the switch when you\'re ready for tomorrow morning.'; return; }
-  if(!S.days.length){ el.innerHTML='⚠️ <strong>Pick at least one day</strong> — tap a day above so the alarm knows when to ring.'; return; }
+  if(!S.on){ el.innerHTML=ico('pause')+' <strong>Alarm is OFF</strong> — flip the switch when you\'re ready for tomorrow morning.'; return; }
+  if(!S.days.length){ el.innerHTML=ico('alert')+' <strong>Pick at least one day</strong> — tap a day above so the alarm knows when to ring.'; return; }
   if(!nextRing) return;
-  el.innerHTML='⏰ <strong>Alarm is ON</strong> — next ring <b>'+whenWord(nextRing)+' at '+fmtTime(nextRing)+'</b> with <b>'+verseFor(nextRing).r+'</b>.';
+  el.innerHTML=ico('bell')+' <strong>Alarm is ON</strong> — next ring <b>'+whenWord(nextRing)+' at '+fmtTime(nextRing)+'</b> with <b>'+verseFor(nextRing).r+'</b>.';
 }
 /* Checked every second. Fires if the alarm time has passed within the last
    10 minutes (covers a phone that briefly slowed the page down), but never
@@ -217,6 +218,8 @@ function fireAlarm(v){
   exitBedside(true);
   $('ringText').textContent='“'+v.t+'”';
   $('ringRef').textContent=v.r;
+  setAntiphon('ringAnt',v);
+  $('ringLine').textContent=(seasonFor(v._pack,new Date())||{}).ringLine||'Rise, and give thanks.';
   $('ringTime').textContent=fmtTime(new Date());
   $('ringStatus').textContent='Playing your chime, then reading today\'s verse…';
   $('ringOverlay').classList.add('show');
@@ -310,7 +313,8 @@ function renderPack(p){
 }
 function renderToday(){
   var v=currentVerse();
-  $('todayText').textContent='“'+v.t+'”';
+  $('todayText').textContent=v.t;   // no quote marks: the first letter is an illuminated drop cap
+  setAntiphon('todayAnt',v);
   $('todayRef').textContent=v.r;
   $('todayLabel').textContent=offset===0?fmtDate(new Date()):'Another verse';
 }
@@ -331,8 +335,10 @@ function renderWeek(){
     var b=document.createElement('button'); b.className='daycard'+(add===0?' today':'');
     var h=document.createElement('b'); h.textContent=(add===0?'Today · ':'')+d.toLocaleDateString([], {weekday:'short',month:'short',day:'numeric'});
     var s=document.createElement('strong'); s.textContent=v.t.slice(0,72)+(v.t.length>72?'…':'');
-    var r=document.createElement('span'); r.textContent=v.r+' · ▶ Hear it';
-    b.appendChild(h); b.appendChild(s); b.appendChild(r);
+    var r=document.createElement('span'); r.textContent=v.r+' · Hear it';
+    b.appendChild(h);
+    if(v.antiphon){ var an=document.createElement('i'); an.textContent=v.antiphon.t; b.appendChild(an); }
+    b.appendChild(s); b.appendChild(r);
     b.addEventListener('click',function(){ speakVerse(v); toast(d.toLocaleDateString([], {weekday:'long'})+' — '+v.r); });
     row.appendChild(b);
   })(add);
@@ -344,10 +350,10 @@ function renderList(filter){
     if(q && (v.t+' '+v.r+' '+(v.k||'')).toLowerCase().indexOf(q)<0) return;
     shown++;
     var row=document.createElement('div'); row.className='vrow';
-    var btn=document.createElement('button'); btn.className='iconbtn'; btn.setAttribute('aria-label','Hear this verse'); btn.textContent='▶';
+    var btn=document.createElement('button'); btn.className='iconbtn'; btn.setAttribute('aria-label','Hear this verse'); btn.innerHTML=ico('play');
     var div=document.createElement('div');
     var bq=document.createElement('blockquote'); bq.textContent='“'+v.t+'”';
-    var c=document.createElement('cite'); c.textContent=v.r.toUpperCase();
+    var c=document.createElement('cite'); c.textContent=v.r;
     div.appendChild(bq); div.appendChild(c); row.appendChild(btn); row.appendChild(div);
     btn.addEventListener('click',function(){
       if(libPlayingV===v && speaking){ stopAllAudio(); toast('Verse stopped.'); return; }
@@ -357,11 +363,72 @@ function renderList(filter){
   });
   if(!shown) list.innerHTML='<p class="sub" style="padding:8px 2px">No verse matches that search.</p>';
 }
+/* ---------- Church year ----------
+   pack.json "seasons": [{date, theme, pill?, headline?, headlineEm?, ringLine?}, …]
+   The latest entry on or before today wins. theme = advent | gaudete | christmas
+   (colours in app.css); packs without seasons keep the default palette. */
+var THEME_COLOR={advent:'#2A1B35',gaudete:'#3B1E2A',christmas:'#2B2213'};
+function seasonFor(p,date){
+  var d=dayStart(date), hit=null;
+  (p.seasons||[]).forEach(function(x){ if(parseDay(x.date)<=d) hit=x; });
+  return hit;
+}
+function applySeason(p){
+  var x=seasonFor(p,new Date()), root=document.documentElement;
+  if(x&&x.theme) root.setAttribute('data-season',x.theme); else root.removeAttribute('data-season');
+  var meta=document.querySelector('meta[name="theme-color"]');
+  if(meta) meta.setAttribute('content',(x&&THEME_COLOR[x.theme])||'#16241B');
+  if(x&&x.pill) $('packPill').textContent=x.pill;
+  if(x&&x.headline) $('headline').textContent=x.headline;
+  if(x&&x.headlineEm) $('headlineEm').textContent=x.headlineEm;
+}
+function setAntiphon(id,v){
+  var el=$(id), a=v.antiphon;
+  el.hidden=!a; if(!a) return;
+  el.querySelector('b').textContent=a.t; el.querySelector('span').textContent=a.l||'';
+}
+/* Advent wreath: the first four milestones are the Sunday candles (the third is
+   rose, for Gaudete), the fifth is the Christ candle. Turn on with "wreath": true. */
+function renderWreath(p){
+  var box=$('wreath'), ms=p.milestones||[];
+  if(!p.wreath || ms.length<5){ box.hidden=true; return; }
+  var today=dayStart(new Date()), lit=0;
+  for(var i=0;i<4;i++) if(parseDay(ms[i].date)<=today) lit=i+1;
+  var christ=parseDay(ms[4].date)<=today;
+  var VIOLET='#5B3A73', ROSE='#C9789A', WHITE='#F7F1E3';
+  // lighting order: front-left, back-left, back-right (rose), front-right
+  var C=[{x:66,b:150,w:18,h:58,c:VIOLET},{x:122,b:126,w:16,h:50,c:VIOLET},{x:198,b:126,w:16,h:50,c:ROSE},{x:254,b:150,w:18,h:58,c:VIOLET}];
+  var center={x:160,b:140,w:20,h:80,c:WHITE};
+  function candle(k,on){
+    var top=k.b-k.h, x=k.x, out='';
+    if(on) out+='<circle cx="'+x+'" cy="'+(top-12)+'" r="24" fill="url(#wglow)"/>';
+    out+='<rect x="'+(x-k.w/2)+'" y="'+top+'" width="'+k.w+'" height="'+k.h+'" rx="2.5" fill="'+k.c+'"/>'+
+         '<rect x="'+(x-k.w/2+2.5)+'" y="'+(top+3)+'" width="3.5" height="'+(k.h-8)+'" rx="1.5" fill="#fff" opacity=".22"/>'+
+         '<line x1="'+x+'" y1="'+top+'" x2="'+x+'" y2="'+(top-6)+'" stroke="#3B2A16" stroke-width="2" stroke-linecap="round"/>';
+    if(on) out+='<path class="flame" d="M'+x+','+(top-28)+' C'+(x+7)+','+(top-18)+' '+(x+7)+','+(top-8)+' '+x+','+(top-4)+' C'+(x-7)+','+(top-8)+' '+(x-7)+','+(top-18)+' '+x+','+(top-28)+'Z" fill="url(#wflame)"/>';
+    return out;
+  }
+  var svg='<svg viewBox="0 0 320 176" role="img" aria-label="Advent wreath: '+(christ?'all five candles lit':lit+' of 4 candles lit')+'">'+
+    '<defs><radialGradient id="wglow"><stop offset="0" stop-color="#FFD88A" stop-opacity=".75"/><stop offset="1" stop-color="#FFD88A" stop-opacity="0"/></radialGradient>'+
+    '<linearGradient id="wflame" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF6D6"/><stop offset=".55" stop-color="#FFC94D"/><stop offset="1" stop-color="#E8892A"/></linearGradient></defs>'+
+    '<ellipse cx="160" cy="140" rx="122" ry="28" fill="none" stroke="#263D2B" stroke-width="24"/>'+
+    '<ellipse cx="160" cy="140" rx="122" ry="28" fill="none" stroke="#3F6247" stroke-width="12" stroke-dasharray="4 6"/>'+
+    '<ellipse cx="160" cy="137" rx="126" ry="31" fill="none" stroke="#4E7556" stroke-width="3" stroke-dasharray="2 9" opacity=".8"/>'+
+    candle(C[1],lit>=2)+candle(C[2],lit>=3)+candle(center,christ)+candle(C[0],lit>=1)+candle(C[3],lit>=4)+
+    '</svg>';
+  var cap;
+  if(christ) cap=parseDay(ms[4].date).getTime()===today.getTime()?'Christ is born — the Christ candle is lit.':'Christmastide — the Light has come.';
+  else if(lit) cap=['First','Second','Third','Fourth'][lit-1]+' week of Advent · '+ms[lit-1].name;
+  else cap='Advent begins '+ms[0].label+' — the first candle is Hope.';
+  box.innerHTML=svg+'<p class="wreath-cap"></p>';
+  box.querySelector('.wreath-cap').textContent=cap;
+  box.hidden=false;
+}
 function renderAll(){
   renderedDay=dayStart(new Date());
   todayVerse=verseFor(new Date()); offset=0;
   var p=todayVerse._pack;
-  renderPack(p); renderToday(); renderPath(p); renderWeek(); renderList($('searchInput').value);
+  renderPack(p); applySeason(p); renderToday(); renderPath(p); renderWreath(p); renderWeek(); renderList($('searchInput').value);
   refreshSchedule();
   warmAudioCache();
 }
@@ -393,11 +460,11 @@ function wire(){
     else { stopAllAudio(); toast('No sound — the verse will start on its own'); }
   });
   $('snoozeSel').addEventListener('change',function(){ S.snooze=+this.value; $('snoozeLabel').textContent=S.snooze; saveSettings(); });
-  $('dismissBtn').addEventListener('click',function(){ closeRing(); snoozeAt=null; if(wakeLock){wakeLock.release().catch(function(){});} toast('Amen — have a blessed day ☀️'); refreshSchedule(); });
+  $('dismissBtn').addEventListener('click',function(){ closeRing(); snoozeAt=null; if(wakeLock){wakeLock.release().catch(function(){});} toast('Amen — have a blessed day.'); refreshSchedule(); });
   $('snoozeBtn').addEventListener('click',function(){
     closeRing();
     snoozeAt=new Date(Date.now()+S.snooze*60000);
-    toast('Snoozed — verse will replay in '+S.snooze+' minutes 💤');
+    toast('Snoozed — verse will replay in '+S.snooze+' minutes.');
     enterBedside();
   });
   $('replayBtn').addEventListener('click',function(){ stopAllAudio(); setTimeout(function(){ speakVerse(verseFor(new Date())); },250); });
@@ -418,7 +485,7 @@ function setupInstall(){
   var banner=$('installBanner');
   var isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1);
   if(isIOS){
-    $('installText').innerHTML='📲 <b>Add to your home screen:</b> tap the Share button <span aria-hidden="true">⬆︎</span>, then <b>“Add to Home Screen.”</b> It opens like an app and works offline.';
+    $('installText').innerHTML=ico('phone')+' <b>Add to your home screen:</b> tap the Share button <span aria-hidden="true">⬆︎</span>, then <b>“Add to Home Screen.”</b> It opens like an app and works offline.';
     banner.classList.add('show');
   }
   var deferred=null;
