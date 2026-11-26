@@ -3,12 +3,13 @@
      packs show up as soon as they're published, and the app still opens offline).
    - Images and audio: cache first (fast, and the 6 AM alarm works offline).
    Bump VERSION when app.js / app.css / index.html change. */
-var VERSION='v1.0.2';
+var VERSION='v1.1.0';
 var SHELL='dva-shell-'+VERSION;
 var MEDIA='dva-media';
 var SHELL_FILES=[
   './','index.html','app.css','app.js','manifest.webmanifest',
-  'sounds/chime.mp3','sounds/bells.mp3',
+  'sounds/chime.mp3','sounds/bells.mp3','sounds/dulcimer.mp3','sounds/musicbox.mp3',
+  'sounds/harp.mp3','sounds/windchimes.mp3','sounds/bowl.mp3',
   'icons/icon-192.png','icons/icon-512.png','icons/apple-touch-icon.png',
   'packs/index.json'
 ];

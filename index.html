@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-title" content="Verse Alarm"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="app.css?v=1.0.2"/>
+<link rel="stylesheet" href="app.css?v=1.1.0"/>
 </head>
 <body>
 <div class="wrap">
@@ -84,11 +84,7 @@
       </div>
       <div>
         <div class="field"><label for="soundSel">Wake-up sound — plays before the verse</label>
-          <select id="soundSel">
-            <option value="chime">Gentle Dawn Chime — soft &amp; warm</option>
-            <option value="bells">Christmas Bells — bright &amp; clear</option>
-            <option value="none">No chime — verse only</option>
-          </select>
+          <select id="soundSel"></select>
         </div>
         <div class="field" style="margin-top:12px"><label for="snoozeSel">Snooze</label>
           <select id="snoozeSel"><option value="5">5 minutes</option><option value="9" selected>9 minutes</option><option value="10">10 minutes</option><option value="15">15 minutes</option></select>
@@ -176,10 +172,9 @@
 </div>
 
 <div class="toast" id="toast" role="status">Alarm set</div>
-<audio id="chimeAudio" preload="auto" src="sounds/chime.mp3"></audio>
-<audio id="bellsAudio" preload="auto" src="sounds/bells.mp3"></audio>
+<audio id="chimeAudio" preload="auto"></audio>
 <audio id="verseAudio" preload="auto"></audio>
 
-<script src="app.js?v=1.0.2"></script>
+<script src="app.js?v=1.1.0"></script>
 </body>
 </html>

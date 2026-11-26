@@ -42,9 +42,15 @@ them), and don't overlap dates. If a new pack is late, the newest pack repeats f
 | `index.html`, `app.css`, `app.js` | The app |
 | `sw.js` | Offline support. Bump `VERSION` when you change the app files (not needed for packs). |
 | `manifest.webmanifest`, `icons/` | Home-screen name and icon |
-| `sounds/` | Wake-up chime and bells |
+| `sounds/` | Wake-up sounds (list lives in `SOUNDS` at the top of the audio section in `app.js`) |
+| `tools/make-sounds.py` | Rebuilds the dulcimer, music box, harp, wind chime and singing bowl sounds |
 | `packs/` | Verse packs + `index.json` |
 | `tools/check-packs.mjs` | Pack checker |
+
+## Adding a wake-up sound
+1. Put an MP3 (5–12 seconds, fades out at the end) in `sounds/`.
+2. Add a line to `SOUNDS` in `app.js` — `lead` is how many seconds play before the verse starts.
+3. Add the file to `SHELL_FILES` in `sw.js` and bump `VERSION`.
 
 ## Publishing (one-time)
 Repo **Settings → Pages → Source: GitHub Actions**. Every push to `main` then checks

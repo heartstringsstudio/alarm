@@ -5,7 +5,7 @@
 (function(){
 'use strict';
 
-var APP_VERSION='1.0.2';
+var APP_VERSION='1.1.0';
 var $=function(id){return document.getElementById(id);};
 var DAY=86400000;
 
@@ -68,7 +68,31 @@ var verseAudio=$('verseAudio'), speaking=false;
 var libPlayingBtn=null, libPlayingV=null;
 function setLibBtn(btn,on){ btn.textContent=on?'■':'▶'; btn.setAttribute('aria-label',on?'Stop this verse':'Hear this verse'); btn.classList.toggle('playing',on); }
 function resetLibBtn(){ if(libPlayingBtn){ setLibBtn(libPlayingBtn,false); libPlayingBtn=null; libPlayingV=null; } }
-function stopChimes(){ ['chimeAudio','bellsAudio'].forEach(function(id){ var a=$(id); a.pause(); try{a.currentTime=0;}catch(e){} }); }
+/* Wake-up sounds. `lead` = seconds before the verse starts (the sound
+   fades out underneath). Add a sound: drop an MP3 in sounds/, add a line
+   here and in SHELL_FILES in sw.js. */
+var SOUNDS=[
+  {id:'chime',      label:'Gentle Dawn Chime — soft & warm',           file:'sounds/chime.mp3',      lead:4.2},
+  {id:'dulcimer',   label:'Mountain Dulcimer — Amazing Grace',          file:'sounds/dulcimer.mp3',   lead:10.4},
+  {id:'musicbox',   label:'Music Box — Silent Night',                   file:'sounds/musicbox.mp3',   lead:7.3},
+  {id:'harp',       label:'Morning Harp — rising',                      file:'sounds/harp.mp3',       lead:7.6},
+  {id:'windchimes', label:'Porch Wind Chimes — soft & airy',            file:'sounds/windchimes.mp3', lead:6.6},
+  {id:'bowl',       label:'Singing Bowl — deep & calm',                 file:'sounds/bowl.mp3',       lead:7.4},
+  {id:'bells',      label:'Christmas Bells — bright & clear',           file:'sounds/bells.mp3',      lead:4.2},
+  {id:'none',       label:'No sound — verse only',                      file:null,                    lead:0.6}
+];
+function soundById(id){ for(var i=0;i<SOUNDS.length;i++) if(SOUNDS[i].id===id) return SOUNDS[i]; return SOUNDS[0]; }
+var chimeAudio=$('chimeAudio'), fadeTimer=null;
+function stopChimes(){ clearInterval(fadeTimer); chimeAudio.pause(); try{chimeAudio.currentTime=0;}catch(e){} chimeAudio.volume=0.9; }
+function fadeChime(ms,then){
+  clearInterval(fadeTimer);
+  if(chimeAudio.paused){ then(); return; }
+  var start=chimeAudio.volume, steps=Math.max(1,Math.round(ms/50)), k=0;
+  fadeTimer=setInterval(function(){
+    k++; try{ chimeAudio.volume=Math.max(0,start*(1-k/steps)); }catch(e){}
+    if(k>=steps){ clearInterval(fadeTimer); then(); }
+  },50);
+}
 function stopSpeech(){ try{ if(window.speechSynthesis) speechSynthesis.cancel(); }catch(e){} }
 
 /* Spoken fallback: used only if a verse's narrated MP3 is missing,
@@ -100,7 +124,9 @@ function stopAllAudio(){ stopChimes(); stopSpeech(); verseAudio.pause(); try{ver
 function playSound(kind){
   stopAllAudio();
   if(kind==='none') return;
-  var a=$(kind==='bells'?'bellsAudio':'chimeAudio');
+  var snd=soundById(kind), a=chimeAudio;
+  if(!snd.file) return;
+  if(a.getAttribute('src')!==snd.file) a.src=snd.file;
   try{a.currentTime=0;}catch(e){} a.volume=0.9;
   var p=a.play(); if(p&&p.catch) p.catch(fallbackChime);
 }
@@ -121,8 +147,9 @@ function fallbackChime(){
 var unlocked=false;
 function unlockAudio(){
   if(unlocked) return; unlocked=true;
-  ['chimeAudio','bellsAudio'].forEach(function(id){
-    var a=$(id); a.muted=true;
+  [chimeAudio,verseAudio].forEach(function(a){
+    if(!a.getAttribute('src')) return;
+    a.muted=true;
     var p=a.play(); var undo=function(){ a.pause(); try{a.currentTime=0;}catch(e){} a.muted=false; };
     if(p&&p.then) p.then(undo,function(){ a.muted=false; unlocked=false; }); else undo();
   });
@@ -137,7 +164,10 @@ function applySettingsToUI(){
   $('alarmTime').value=S.time;
   setToggle(S.on);
   document.querySelectorAll('.day').forEach(function(b){ b.classList.toggle('on',S.days.indexOf(+b.dataset.d)>=0); });
-  $('soundSel').value=S.sound;
+  var sel=$('soundSel'); sel.innerHTML='';
+  SOUNDS.forEach(function(x){ var o=document.createElement('option'); o.value=x.id; o.textContent=x.label; sel.appendChild(o); });
+  S.sound=soundById(S.sound).id; sel.value=S.sound;
+  if(soundById(S.sound).file) chimeAudio.src=soundById(S.sound).file;
   $('snoozeSel').value=String(S.snooze);
   $('snoozeLabel').textContent=S.snooze;
 }
@@ -192,8 +222,10 @@ function fireAlarm(v){
   $('ringOverlay').classList.add('show');
   if(navigator.vibrate) navigator.vibrate([300,150,300,150,500]);
   clearTimeout(speakTimer);
-  if(S.sound==='none') speakTimer=setTimeout(function(){speakVerse(v);},600);
-  else { playSound(S.sound); speakTimer=setTimeout(function(){speakVerse(v);},4200); }
+  var snd=soundById(S.sound);
+  playSound(snd.id);
+  // Fade the sound out over the last second of its lead, then read the verse.
+  speakTimer=setTimeout(function(){ fadeChime(900,function(){ speakVerse(v); }); }, Math.max(0,snd.lead*1000-900));
   holdWakeLock();
 }
 function closeRing(){ clearTimeout(speakTimer); stopAllAudio(); $('ringOverlay').classList.remove('show'); }
@@ -355,7 +387,11 @@ function wire(){
   document.querySelectorAll('[data-quick]').forEach(function(b){ b.addEventListener('click',function(){
     S.time=b.dataset.quick; S.on=true; $('alarmTime').value=S.time; setToggle(true); saveSettings(); refreshSchedule(); toast('Wake-up set for '+b.textContent.trim());
   });});
-  $('soundSel').addEventListener('change',function(){ S.sound=this.value; saveSettings(); });
+  $('soundSel').addEventListener('change',function(){
+    S.sound=this.value; saveSettings();
+    if(soundById(S.sound).file){ playSound(S.sound); toast('Preview: '+soundById(S.sound).label.split(' — ')[0]+' — tap ■ Stop to end'); }
+    else { stopAllAudio(); toast('No sound — the verse will start on its own'); }
+  });
   $('snoozeSel').addEventListener('change',function(){ S.snooze=+this.value; $('snoozeLabel').textContent=S.snooze; saveSettings(); });
   $('dismissBtn').addEventListener('click',function(){ closeRing(); snoozeAt=null; if(wakeLock){wakeLock.release().catch(function(){});} toast('Amen — have a blessed day ☀️'); refreshSchedule(); });
   $('snoozeBtn').addEventListener('click',function(){
