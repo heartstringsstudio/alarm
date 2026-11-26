@@ -108,10 +108,10 @@ select{width:100%;max-width:100%;border:1.5px solid var(--line);border-radius:12
 @media (prefers-color-scheme: dark){.iconbtn{background:#232F2A;color:#fff}}
 
 /* RINGING OVERLAY */
-.overlay{position:fixed;inset:0;z-index:50;display:none;color:#fff}
+.overlay{position:fixed;inset:0;z-index:50;display:none;color:#fff;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .overlay.show{display:flex;flex-direction:column}
-.overlay img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.overlay::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,12,10,.35),rgba(8,12,10,.82))}
+.overlay img{position:fixed;inset:0;width:100%;height:100%;object-fit:cover}
+.overlay::after{content:"";position:fixed;inset:0;background:linear-gradient(180deg,rgba(8,12,10,.35),rgba(8,12,10,.82))}
 .overlay-inner{position:relative;z-index:1;margin:auto;width:min(680px,calc(100% - 32px));text-align:center;padding:28px 0}
 .overlay .timebig{font-size:64px;font-weight:800;letter-spacing:-.04em;line-height:1}
 .overlay blockquote{font-family:"Cormorant Garamond",serif;font-size:34px;line-height:1.25;font-weight:600;margin:18px 0 8px}
@@ -124,7 +124,7 @@ select{width:100%;max-width:100%;border:1.5px solid var(--line);border-radius:12
 .note{font-size:13px;color:var(--muted);line-height:1.55;margin-top:12px}
 .footer{text-align:center;color:var(--muted);font-size:13px;line-height:1.6;margin-top:26px;padding:0 10px}
 /* ---------- Installable-app additions ---------- */
-html,body{overscroll-behavior-y:none}
+
 body{padding-bottom:env(safe-area-inset-bottom)}
 .hero-inner{padding-top:calc(22px + env(safe-area-inset-top))}
 .hero img.bg[src=""]{display:none}
