@@ -79,8 +79,8 @@
   {
    "date": "2026-12-25",
    "theme": "christmas",
-   "headline": "Unto you is born",
-   "headlineEm": "this day a Saviour.",
+   "headline": "Christ the Saviour",
+   "headlineEm": "is born.",
    "ringLine": "O come, let us adore Him.",
    "pill": "Christmastide · Daily Verse Alarm"
   },
@@ -214,9 +214,10 @@
    }
   },
   {
-   "t": "And the angel said unto them, Fear not: for, behold, I bring you good tidings of great joy, which shall be to all people.",
-   "r": "Luke 2:10",
-   "k": "advent joy angel fear not good tidings christmas shepherds",
+   "t": "And she coming in that instant gave thanks likewise unto the Lord, and spake of him to all them that looked for redemption in Jerusalem.",
+   "r": "Luke 2:38",
+   "k": "advent anna redemption waiting thanks temple",
+   "audio": "audio/verse-36.mp3",
    "antiphon": {
     "t": "O Adonai",
     "l": "O Adonai, and Ruler of the house of Israel: come, and redeem us with an outstretched arm."
@@ -241,71 +242,82 @@
    }
   },
   {
-   "t": "And she brought forth her firstborn son, and wrapped him in swaddling clothes, and laid him in a manger; because there was no room for them in the inn.",
-   "r": "Luke 2:7",
-   "k": "christmas birth manger swaddling nativity",
+   "t": "But when the fulness of the time was come, God sent forth his Son, made of a woman, made under the law, To redeem them that were under the law, that we might receive the adoption of sons.",
+   "r": "Galatians 4:4–5",
+   "k": "advent fulness of time son redeem adoption",
+   "audio": "audio/verse-37.mp3",
    "antiphon": {
     "t": "O Dayspring",
     "l": "O Dayspring, brightness of the light eternal and Sun of righteousness: come, and enlighten them that sit in darkness."
    }
   },
   {
-   "t": "For unto you is born this day in the city of David a Saviour, which is Christ the Lord.",
-   "r": "Luke 2:11",
-   "k": "christmas born saviour city of david angel",
+   "t": "Which thou hast prepared before the face of all people; A light to lighten the Gentiles, and the glory of thy people Israel.",
+   "r": "Luke 2:31–32",
+   "k": "advent simeon light gentiles nations glory israel",
+   "audio": "audio/verse-35.mp3",
    "antiphon": {
     "t": "O King of the Nations",
     "l": "O King of the nations, and their Desire, the Cornerstone that makest both one: come, and save us."
    }
   },
   {
-   "t": "And suddenly there was with the angel a multitude of the heavenly host praising God, and saying, Glory to God in the highest, and on earth peace, good will toward men.",
-   "r": "Luke 2:13–14",
-   "k": "christmas angel host glory peace shepherds",
+   "t": "And the Word was made flesh, and dwelt among us, (and we beheld his glory, the glory as of the only begotten of the Father,) full of grace and truth.",
+   "r": "John 1:14",
+   "k": "advent emmanuel word made flesh glory grace truth",
+   "audio": "audio/verse-31.mp3",
    "antiphon": {
     "t": "O Emmanuel",
     "l": "O Emmanuel, our King and Lawgiver, the Hope of the nations: come, and save us, O Lord our God."
    }
   },
   {
-   "t": "And they came with haste, and found Mary, and Joseph, and the babe lying in a manger.",
-   "r": "Luke 2:16",
-   "k": "christmas shepherds manger mary joseph babe christmas eve"
+   "t": "And she brought forth her firstborn son, and wrapped him in swaddling clothes, and laid him in a manger; because there was no room for them in the inn.",
+   "r": "Luke 2:7",
+   "k": "christmas eve birth manger swaddling nativity inn",
+   "audio": "audio/verse-27.mp3"
   },
   {
-   "t": "And the Word was made flesh, and dwelt among us, (and we beheld his glory, the glory as of the only begotten of the Father,) full of grace and truth.",
-   "r": "John 1:14",
-   "k": "christmas day word made flesh glory grace truth"
+   "t": "For unto you is born this day in the city of David a Saviour, which is Christ the Lord.",
+   "r": "Luke 2:11",
+   "k": "christmas day born saviour city of david angel",
+   "audio": "audio/verse-28.mp3"
+  },
+  {
+   "t": "And the angel said unto them, Fear not: for, behold, I bring you good tidings of great joy, which shall be to all people.",
+   "r": "Luke 2:10",
+   "k": "advent joy angel fear not good tidings christmas shepherds",
+   "audio": "audio/verse-24.mp3"
+  },
+  {
+   "t": "And suddenly there was with the angel a multitude of the heavenly host praising God, and saying, Glory to God in the highest, and on earth peace, good will toward men.",
+   "r": "Luke 2:13–14",
+   "k": "christmas angel host glory peace shepherds",
+   "audio": "audio/verse-29.mp3"
+  },
+  {
+   "t": "And they came with haste, and found Mary, and Joseph, and the babe lying in a manger.",
+   "r": "Luke 2:16",
+   "k": "christmas shepherds manger mary joseph babe christmas eve",
+   "audio": "audio/verse-30.mp3"
   },
   {
    "t": "Now when Jesus was born in Bethlehem of Judaea in the days of Herod the king, behold, there came wise men from the east to Jerusalem, Saying, Where is he that is born King of the Jews? for we have seen his star in the east, and are come to worship him.",
    "r": "Matthew 2:1–2",
-   "k": "christmas wise men star bethlehem king worship"
+   "k": "christmas wise men star bethlehem king worship",
+   "audio": "audio/verse-32.mp3"
   },
   {
    "t": "When they saw the star, they rejoiced with exceeding great joy. And when they were come into the house, they saw the young child with Mary his mother, and fell down, and worshipped him: and when they had opened their treasures, they presented unto him gifts; gold, and frankincense, and myrrh.",
    "r": "Matthew 2:10–11",
-   "k": "christmas wise men star joy worship gifts gold frankincense myrrh"
+   "k": "christmas wise men star joy worship gifts gold frankincense myrrh",
+   "audio": "audio/verse-33.mp3"
   },
   {
    "t": "Then took he him up in his arms, and blessed God, and said, Lord, now lettest thou thy servant depart in peace, according to thy word: For mine eyes have seen thy salvation.",
    "r": "Luke 2:28–30",
-   "k": "christmas simeon temple peace salvation"
-  },
-  {
-   "t": "Which thou hast prepared before the face of all people; A light to lighten the Gentiles, and the glory of thy people Israel.",
-   "r": "Luke 2:31–32",
-   "k": "christmas simeon light gentiles glory israel"
-  },
-  {
-   "t": "And she coming in that instant gave thanks likewise unto the Lord, and spake of him to all them that looked for redemption in Jerusalem.",
-   "r": "Luke 2:38",
-   "k": "christmas anna temple thanks redemption jerusalem"
-  },
-  {
-   "t": "But when the fulness of the time was come, God sent forth his Son, made of a woman, made under the law, To redeem them that were under the law, that we might receive the adoption of sons.",
-   "r": "Galatians 4:4–5",
-   "k": "christmas fulness of time son redeem adoption year end"
+   "k": "christmas simeon peace salvation year end",
+   "audio": "audio/verse-34.mp3"
   },
   {
    "t": "Therefore if any man be in Christ, he is a new creature: old things are passed away; behold, all things are become new.",
