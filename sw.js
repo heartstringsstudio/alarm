@@ -3,7 +3,7 @@
      packs show up as soon as they're published, and the app still opens offline).
    - Images and audio: cache first (fast, and the 6 AM alarm works offline).
    Bump VERSION when app.js / app.css / index.html change. */
-var VERSION='v1.0.1';
+var VERSION='v1.0.2';
 var SHELL='dva-shell-'+VERSION;
 var MEDIA='dva-media';
 var SHELL_FILES=[
@@ -78,7 +78,9 @@ self.addEventListener('fetch',function(e){
     return;
   }
 
-  e.respondWith(fetch(req).then(function(r){
+  // cache:'no-cache' makes the phone check GitHub for a newer copy every
+  // time, instead of reusing a stale one for up to 10 minutes.
+  e.respondWith(fetch(url.href,{cache:'no-cache',credentials:'same-origin'}).then(function(r){
     if(r.ok){ var copy=r.clone(); caches.open(SHELL).then(function(c){ c.put(req,copy); }); }
     return r;
   }).catch(function(){

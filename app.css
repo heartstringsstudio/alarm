@@ -6,8 +6,8 @@
 @media (prefers-color-scheme: dark){
   :root{ --bg:#0D130E; --bg2:#141D15; --card:#1A241C; --ink:#F3EDDC; --muted:#A9B3A0; --line:#2B362B; --gold-soft:#2A2416; --sage-soft:#1C2B1F; --shadow:0 10px 30px rgba(0,0,0,.35); }
 }
-*{box-sizing:border-box} html{scroll-behavior:smooth;overflow-x:hidden}
-body{margin:0;font-family:"DM Sans",system-ui,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+*{box-sizing:border-box}
+body{margin:0;font-family:"DM Sans",system-ui,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 button,input,select{font:inherit;min-height:44px}
 a{color:var(--gold)}
 .wrap{max-width:760px;margin:0 auto;padding:0 16px 48px}

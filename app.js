@@ -5,7 +5,7 @@
 (function(){
 'use strict';
 
-var APP_VERSION='1.0.1';
+var APP_VERSION='1.0.2';
 var $=function(id){return document.getElementById(id);};
 var DAY=86400000;
 
@@ -391,10 +391,11 @@ function setupInstall(){
   $('installDismiss').addEventListener('click',function(){ banner.classList.remove('show'); store.set('installDismissed',true); });
   window.addEventListener('appinstalled',function(){ banner.classList.remove('show'); toast('Installed — find Verse Alarm on your home screen.'); });
 }
+var wantReload=false;
 function setupServiceWorker(){
   if(!('serviceWorker' in navigator)) return;
   navigator.serviceWorker.register('sw.js').then(function(reg){
-    function prompt(w){ $('updateBanner').classList.add('show'); $('updateBtn').onclick=function(){ w.postMessage({type:'skipWaiting'}); }; }
+    function prompt(w){ $('updateBanner').classList.add('show'); $('updateBtn').onclick=function(){ wantReload=true; w.postMessage({type:'skipWaiting'}); }; }
     if(reg.waiting && navigator.serviceWorker.controller) prompt(reg.waiting);
     reg.addEventListener('updatefound',function(){
       var w=reg.installing; if(!w) return;
@@ -403,8 +404,10 @@ function setupServiceWorker(){
     // Check for a new app/pack version whenever the app is reopened.
     document.addEventListener('visibilitychange',function(){ if(document.visibilityState==='visible') reg.update().catch(function(){}); });
   }).catch(function(){});
+  // Reload only when the person tapped "Refresh" — never on first open,
+  // which would jump the page back to the top mid-scroll.
   var reloading=false;
-  navigator.serviceWorker.addEventListener('controllerchange',function(){ if(reloading) return; reloading=true; location.reload(); });
+  navigator.serviceWorker.addEventListener('controllerchange',function(){ if(!wantReload || reloading) return; reloading=true; location.reload(); });
   navigator.serviceWorker.ready.then(function(){ setTimeout(warmAudioCache,1500); });
 }
 
