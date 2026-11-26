@@ -1,0 +1,27 @@
+{
+ "id": "2027-01-january",
+ "title": "January 2027 · New Mercies",
+ "pill": "January · Daily Verse Alarm",
+ "start": "2027-01-02",
+ "headline": "Wake up to",
+ "headlineEm": "new mercies.",
+ "lead": "One verse for every January morning. A gentle chime fades in, then that day's verse is read aloud, so the first voice you hear is God's.",
+ "seasonKicker": "The month ahead",
+ "seasonTitle": "January mornings",
+ "seasonSub": "Thirty mornings, each with its own verse, in date order. Tap any day to hear it now.",
+ "librarySub": "Every verse this month, one per morning. Tap ▶ to hear it; tap again to stop.",
+ "searchHint": "Search — try “mercy”, “new”, “strength”…",
+ "footer": "January 2027 — one verse for each morning, in date order, so everyone who wakes with this alarm hears the same verse that morning. Verses in the King James (public-domain) rendering.",
+ "images": { "hero": "img/hero.webp", "photo": "img/photo.webp", "side": "img/side.webp" },
+ "photoCaption": { "title": "First light, first Word.", "text": "Before the news, before the phone buzzes — the day's verse, spoken out loud to start the morning." },
+ "sideVerse": { "t": "Thy word is a lamp unto my feet, and a light unto my path.", "r": "Psalm 119:105" },
+ "milestones": [
+  { "date": "2027-01-03", "label": "Jan 3", "name": "Week 1" },
+  { "date": "2027-01-10", "label": "Jan 10", "name": "Week 2" }
+ ],
+ "audio": "audio/verse-{nn}.mp3",
+ "verses": [
+  { "t": "It is of the Lord's mercies that we are not consumed, because his compassions fail not. They are new every morning: great is thy faithfulness.", "r": "Lamentations 3:22–23", "k": "mercy morning new faithfulness" },
+  { "t": "This is the day which the Lord hath made; we will rejoice and be glad in it.", "r": "Psalm 118:24", "k": "day rejoice glad morning" }
+ ]
+}

@@ -1,0 +1,253 @@
+{
+ "id": "2026-advent",
+ "title": "Advent & Christmas 2026",
+ "pill": "Advent · Daily Verse Alarm",
+ "start": "2026-11-25",
+ "headline": "Wake up to",
+ "headlineEm": "the coming King.",
+ "lead": "Thirty-eight mornings — from November 25 through New Year’s Day — walking through Advent to the manger and beyond. A gentle chime fades in, then that day’s verse is read aloud, so the first voice you hear is God’s.",
+ "seasonKicker": "The season ahead",
+ "seasonTitle": "Advent to the New Year",
+ "seasonSub": "Thirty-eight mornings, each with its own verse, in date order — hope and prophecy, peace and preparation, joy, then love and the birth, through Christmas week to New Year’s Day. Tap any day to hear it now.",
+ "librarySub": "38 verses — one for each morning from November 25 through New Year’s Day, following the Advent arc: hope, peace, joy, and love, then the Christmas readings. Tap ▶ on any verse to hear it; tap again to stop.",
+ "searchHint": "Search — try “hope”, “peace”, “joy”, “Bethlehem”, “shepherds”…",
+ "footer": "Advent & Christmas 2026 — one verse for each morning from November 25 through New Year’s Day, in date order, so everyone who wakes with this alarm hears the same verse that morning. Verses in the King James (public-domain) rendering.",
+ "images": {
+  "hero": "img/hero.webp",
+  "photo": "img/photo.webp",
+  "side": "img/side.webp"
+ },
+ "photoCaption": {
+  "title": "First light, first Word.",
+  "text": "Before the news, before the phone buzzes — the day’s Advent verse, spoken out loud to start the morning."
+ },
+ "sideVerse": {
+  "t": "Thy word is a lamp unto my feet, and a light unto my path.",
+  "r": "Psalm 119:105"
+ },
+ "milestones": [
+  {
+   "date": "2026-11-29",
+   "label": "Nov 29",
+   "name": "Hope"
+  },
+  {
+   "date": "2026-12-06",
+   "label": "Dec 6",
+   "name": "Peace"
+  },
+  {
+   "date": "2026-12-13",
+   "label": "Dec 13",
+   "name": "Joy"
+  },
+  {
+   "date": "2026-12-20",
+   "label": "Dec 20",
+   "name": "Love"
+  },
+  {
+   "date": "2026-12-25",
+   "label": "Dec 25",
+   "name": "Christmas Day"
+  },
+  {
+   "date": "2027-01-01",
+   "label": "Jan 1",
+   "name": "New Year"
+  }
+ ],
+ "audio": "audio/verse-{nn}.mp3",
+ "verses": [
+  {
+   "t": "The people that walked in darkness have seen a great light: they that dwell in the land of the shadow of death, upon them hath the light shined.",
+   "r": "Isaiah 9:2",
+   "k": "advent hope prophecy light darkness morning"
+  },
+  {
+   "t": "For unto us a child is born, unto us a son is given: and the government shall be upon his shoulder: and his name shall be called Wonderful, Counsellor, The mighty God, The everlasting Father, The Prince of Peace.",
+   "r": "Isaiah 9:6",
+   "k": "advent hope prophecy child born prince of peace christmas"
+  },
+  {
+   "t": "Therefore the Lord himself shall give you a sign; Behold, a virgin shall conceive, and bear a son, and shall call his name Immanuel.",
+   "r": "Isaiah 7:14",
+   "k": "advent hope prophecy virgin immanuel sign"
+  },
+  {
+   "t": "And there shall come forth a rod out of the stem of Jesse, and a Branch shall grow out of his roots.",
+   "r": "Isaiah 11:1",
+   "k": "advent hope prophecy jesse branch"
+  },
+  {
+   "t": "But thou, Bethlehem Ephratah, though thou be little among the thousands of Judah, yet out of thee shall he come forth unto me that is to be ruler in Israel; whose goings forth have been from of old, from everlasting.",
+   "r": "Micah 5:2",
+   "k": "advent hope prophecy bethlehem ruler first sunday"
+  },
+  {
+   "t": "Behold, the days come, saith the Lord, that I will raise unto David a righteous Branch, and a King shall reign and prosper, and shall execute judgment and justice in the earth.",
+   "r": "Jeremiah 23:5",
+   "k": "advent hope prophecy david branch king"
+  },
+  {
+   "t": "Arise, shine; for thy light is come, and the glory of the Lord is risen upon thee.",
+   "r": "Isaiah 60:1",
+   "k": "advent hope light arise shine morning"
+  },
+  {
+   "t": "The Spirit of the Lord God is upon me; because the Lord hath anointed me to preach good tidings unto the meek; he hath sent me to bind up the brokenhearted, to proclaim liberty to the captives, and the opening of the prison to them that are bound.",
+   "r": "Isaiah 61:1",
+   "k": "advent hope prophecy spirit anointed good tidings brokenhearted"
+  },
+  {
+   "t": "I wait for the Lord, my soul doth wait, and in his word do I hope. My soul waiteth for the Lord more than they that watch for the morning: I say, more than they that watch for the morning.",
+   "r": "Psalm 130:5–6",
+   "k": "advent hope wait watch morning psalm"
+  },
+  {
+   "t": "Now the God of hope fill you with all joy and peace in believing, that ye may abound in hope, through the power of the Holy Ghost.",
+   "r": "Romans 15:13",
+   "k": "advent hope joy peace believing holy ghost"
+  },
+  {
+   "t": "Behold, God is my salvation; I will trust, and not be afraid: for the Lord Jehovah is my strength and my song; he also is become my salvation.",
+   "r": "Isaiah 12:2",
+   "k": "advent hope salvation trust strength song"
+  },
+  {
+   "t": "The voice of him that crieth in the wilderness, Prepare ye the way of the Lord, make straight in the desert a highway for our God.",
+   "r": "Isaiah 40:3",
+   "k": "advent peace preparation prepare way wilderness second sunday"
+  },
+  {
+   "t": "Comfort ye, comfort ye my people, saith your God.",
+   "r": "Isaiah 40:1",
+   "k": "advent peace preparation comfort"
+  },
+  {
+   "t": "Behold, I will send my messenger, and he shall prepare the way before me: and the Lord, whom ye seek, shall suddenly come to his temple, even the messenger of the covenant, whom ye delight in: behold, he shall come, saith the Lord of hosts.",
+   "r": "Malachi 3:1",
+   "k": "advent peace preparation messenger temple covenant"
+  },
+  {
+   "t": "And he shall go before him in the spirit and power of Elias, to turn the hearts of the fathers to the children, and the disobedient to the wisdom of the just; to make ready a people prepared for the Lord.",
+   "r": "Luke 1:17",
+   "k": "advent peace preparation john baptist elias hearts prepared"
+  },
+  {
+   "t": "And let the peace of God rule in your hearts, to the which also ye are called in one body; and be ye thankful.",
+   "r": "Colossians 3:15",
+   "k": "advent peace hearts thankful"
+  },
+  {
+   "t": "How beautiful upon the mountains are the feet of him that bringeth good tidings, that publisheth peace; that bringeth good tidings of good, that publisheth salvation; that saith unto Zion, Thy God reigneth!",
+   "r": "Isaiah 52:7",
+   "k": "advent peace mountains feet good tidings salvation"
+  },
+  {
+   "t": "Through the tender mercy of our God; whereby the dayspring from on high hath visited us, To give light to them that sit in darkness and in the shadow of death, to guide our feet into the way of peace.",
+   "r": "Luke 1:78–79",
+   "k": "advent peace dayspring light darkness morning mercy"
+  },
+  {
+   "t": "Rejoice in the Lord alway: and again I say, Rejoice.",
+   "r": "Philippians 4:4",
+   "k": "advent joy rejoice gaudete third sunday"
+  },
+  {
+   "t": "And Mary said, My soul doth magnify the Lord, And my spirit hath rejoiced in God my Saviour.",
+   "r": "Luke 1:46–47",
+   "k": "advent joy mary magnificat rejoiced saviour"
+  },
+  {
+   "t": "I will greatly rejoice in the Lord, my soul shall be joyful in my God; for he hath clothed me with the garments of salvation, he hath covered me with the robe of righteousness, as a bridegroom decketh himself with ornaments, and as a bride adorneth herself with her jewels.",
+   "r": "Isaiah 61:10",
+   "k": "advent joy rejoice salvation righteousness bridegroom"
+  },
+  {
+   "t": "The Lord thy God in the midst of thee is mighty; he will save, he will rejoice over thee with joy; he will rest in his love, he will joy over thee with singing.",
+   "r": "Zephaniah 3:17",
+   "k": "advent joy singing love mighty save"
+  },
+  {
+   "t": "Then he said unto them, Go your way, eat the fat, and drink the sweet, and send portions unto them for whom nothing is prepared: for this day is holy unto our Lord: neither be ye sorry; for the joy of the Lord is your strength.",
+   "r": "Nehemiah 8:10",
+   "k": "advent joy strength feast holy"
+  },
+  {
+   "t": "And the angel said unto them, Fear not: for, behold, I bring you good tidings of great joy, which shall be to all people.",
+   "r": "Luke 2:10",
+   "k": "advent joy angel fear not good tidings christmas shepherds"
+  },
+  {
+   "t": "And the ransomed of the Lord shall return, and come to Zion with songs and everlasting joy upon their heads: they shall obtain joy and gladness, and sorrow and sighing shall flee away.",
+   "r": "Isaiah 35:10",
+   "k": "advent joy songs gladness ransomed zion"
+  },
+  {
+   "t": "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.",
+   "r": "John 3:16",
+   "k": "advent love god so loved world son fourth sunday"
+  },
+  {
+   "t": "And she brought forth her firstborn son, and wrapped him in swaddling clothes, and laid him in a manger; because there was no room for them in the inn.",
+   "r": "Luke 2:7",
+   "k": "christmas birth manger swaddling nativity"
+  },
+  {
+   "t": "For unto you is born this day in the city of David a Saviour, which is Christ the Lord.",
+   "r": "Luke 2:11",
+   "k": "christmas born saviour city of david angel"
+  },
+  {
+   "t": "And suddenly there was with the angel a multitude of the heavenly host praising God, and saying, Glory to God in the highest, and on earth peace, good will toward men.",
+   "r": "Luke 2:13–14",
+   "k": "christmas angel host glory peace shepherds"
+  },
+  {
+   "t": "And they came with haste, and found Mary, and Joseph, and the babe lying in a manger.",
+   "r": "Luke 2:16",
+   "k": "christmas shepherds manger mary joseph babe christmas eve"
+  },
+  {
+   "t": "And the Word was made flesh, and dwelt among us, (and we beheld his glory, the glory as of the only begotten of the Father,) full of grace and truth.",
+   "r": "John 1:14",
+   "k": "christmas day word made flesh glory grace truth"
+  },
+  {
+   "t": "Now when Jesus was born in Bethlehem of Judaea in the days of Herod the king, behold, there came wise men from the east to Jerusalem, Saying, Where is he that is born King of the Jews? for we have seen his star in the east, and are come to worship him.",
+   "r": "Matthew 2:1–2",
+   "k": "christmas wise men star bethlehem king worship"
+  },
+  {
+   "t": "When they saw the star, they rejoiced with exceeding great joy. And when they were come into the house, they saw the young child with Mary his mother, and fell down, and worshipped him: and when they had opened their treasures, they presented unto him gifts; gold, and frankincense, and myrrh.",
+   "r": "Matthew 2:10–11",
+   "k": "christmas wise men star joy worship gifts gold frankincense myrrh"
+  },
+  {
+   "t": "Then took he him up in his arms, and blessed God, and said, Lord, now lettest thou thy servant depart in peace, according to thy word: For mine eyes have seen thy salvation.",
+   "r": "Luke 2:28–30",
+   "k": "christmas simeon temple peace salvation"
+  },
+  {
+   "t": "Which thou hast prepared before the face of all people; A light to lighten the Gentiles, and the glory of thy people Israel.",
+   "r": "Luke 2:31–32",
+   "k": "christmas simeon light gentiles glory israel"
+  },
+  {
+   "t": "And she coming in that instant gave thanks likewise unto the Lord, and spake of him to all them that looked for redemption in Jerusalem.",
+   "r": "Luke 2:38",
+   "k": "christmas anna temple thanks redemption jerusalem"
+  },
+  {
+   "t": "But when the fulness of the time was come, God sent forth his Son, made of a woman, made under the law, To redeem them that were under the law, that we might receive the adoption of sons.",
+   "r": "Galatians 4:4–5",
+   "k": "christmas fulness of time son redeem adoption year end"
+  },
+  {
+   "t": "Therefore if any man be in Christ, he is a new creature: old things are passed away; behold, all things are become new.",
+   "r": "2 Corinthians 5:17",
+   "k": "new year new creature christ behold all things new january"
+  }
+ ]
+}

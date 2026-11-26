@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="46%" r="42%">
+      <stop offset="0" stop-color="#FFD88A" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#FFD88A" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="flame" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFF3C9"/><stop offset=".55" stop-color="#FFC94D"/><stop offset="1" stop-color="#E8892A"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="#16241B"/>
+  <path d="M0 372 C 90 318 150 340 220 312 S 360 268 512 320 V512 H0Z" fill="#20352A"/>
+  <path d="M0 412 C 120 372 220 392 300 370 S 440 350 512 380 V512 H0Z" fill="#2A4434"/>
+  <circle cx="256" cy="200" r="190" fill="url(#glow)"/>
+  <rect x="222" y="232" width="68" height="150" rx="10" fill="#F3EDDC"/>
+  <rect x="222" y="232" width="68" height="18" rx="9" fill="#E6DDC6"/>
+  <line x1="256" y1="232" x2="256" y2="214" stroke="#3B2A16" stroke-width="5" stroke-linecap="round"/>
+  <path d="M256 128 C 284 168 292 192 278 208 C 268 219 244 219 234 208 C 220 192 228 168 256 128Z" fill="url(#flame)"/>
+  <circle cx="370" cy="118" r="6" fill="#FFD88A"/>
+  <circle cx="140" cy="150" r="4" fill="#FFD88A" opacity=".8"/>
+</svg>

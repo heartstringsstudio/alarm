@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="color-scheme" content="light dark"/>
+<meta name="theme-color" content="#16241B"/>
+<meta name="description" content="Wake up to Scripture — a gentle chime, then the day's verse read aloud. New verse pack every month from Heartstrings Studio."/>
+<title>Daily Verse Alarm</title>
+<link rel="manifest" href="manifest.webmanifest"/>
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png"/>
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="Verse Alarm"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css"/>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO / TODAY -->
+  <header class="hero">
+    <img class="bg" id="heroImg" src="" alt="">
+    <div class="hero-inner">
+      <div class="toprow">
+        <span class="pill"><span class="dot"></span> <span id="packPill">Daily Verse Alarm</span></span>
+        <div class="clock"><span id="dateLine">—</span><strong id="clockLine">--:--</strong></div>
+      </div>
+      <h1><span id="headline">Wake up to</span><br><em id="headlineEm">the Word.</em></h1>
+      <p class="lead" id="packLead">Loading this month's verses…</p>
+
+      <div class="verse-hero" aria-live="polite">
+        <div class="label"><span>✦ Today's verse</span><span id="todayLabel">Today</span></div>
+        <blockquote id="todayText">“…”</blockquote>
+        <cite id="todayRef">—</cite>
+        <div class="hero-actions">
+          <button class="btn btn-gold" id="hearTodayBtn">🔊 Hear today's verse</button>
+          <button class="btn btn-white" id="previewBtn">⏰ Preview wake-up</button>
+          <button class="btn btn-outline" id="anotherBtn">↻ Another verse</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- INSTALL / UPDATE BANNERS -->
+  <div class="banner" id="installBanner">
+    <p id="installText">📲 <b>Put this on your home screen</b> so it opens like an app and works offline.</p>
+    <button class="btn btn-dark" id="installBtn" hidden>Install app</button>
+    <button class="btn btn-outline" id="installDismiss">Not now</button>
+  </div>
+  <div class="banner" id="updateBanner">
+    <p>✨ <b>New verses are ready.</b> Tap to load this month's pack.</p>
+    <button class="btn btn-dark" id="updateBtn">Refresh</button>
+  </div>
+
+  <!-- ALARM BUILDER -->
+  <section class="card section" id="alarm">
+    <div class="kicker">Your alarm</div>
+    <h2>Set tomorrow's wake-up</h2>
+    <p class="sub">Pick a time, choose your days, and pick your wake-up sound. At bedtime, tap <b>Start bedside mode</b> — the screen dims to a quiet clock and stays awake so the chime and the day's verse can play right on time.</p>
+
+    <div class="alarm-grid">
+      <div>
+        <div class="field"><label for="alarmTime">Wake-up time</label>
+          <div class="time-display">
+            <input type="time" id="alarmTime" value="06:30">
+            <button type="button" class="toggle on" id="alarmToggle" aria-label="Turn alarm on or off" aria-pressed="true"><span></span></button>
+          </div>
+        </div>
+        <div class="field" style="margin-top:14px"><label>Repeat on</label>
+          <div class="days" id="daysRow">
+            <button class="day on" data-d="1" aria-label="Monday">M</button><button class="day on" data-d="2" aria-label="Tuesday">Tu</button><button class="day on" data-d="3" aria-label="Wednesday">W</button><button class="day on" data-d="4" aria-label="Thursday">Th</button><button class="day on" data-d="5" aria-label="Friday">F</button><button class="day" data-d="6" aria-label="Saturday">Sa</button><button class="day on" data-d="0" aria-label="Sunday">Su</button>
+          </div>
+        </div>
+        <div class="quick">
+          <button class="chip" data-quick="05:30">5:30 AM · Early riser</button>
+          <button class="chip" data-quick="06:00">6:00 AM</button>
+          <button class="chip" data-quick="06:30">6:30 AM</button>
+          <button class="chip" data-quick="07:00">7:00 AM</button>
+        </div>
+      </div>
+      <div>
+        <div class="field"><label for="soundSel">Wake-up sound — plays before the verse</label>
+          <select id="soundSel">
+            <option value="chime">Gentle Dawn Chime — soft &amp; warm</option>
+            <option value="bells">Christmas Bells — bright &amp; clear</option>
+            <option value="none">No chime — verse only</option>
+          </select>
+        </div>
+        <div class="field" style="margin-top:12px"><label for="snoozeSel">Snooze</label>
+          <select id="snoozeSel"><option value="5">5 minutes</option><option value="9" selected>9 minutes</option><option value="10">10 minutes</option><option value="15">15 minutes</option></select>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+          <button class="btn btn-dark" id="testSoundBtn" style="flex:1">▶ Test sound</button>
+          <button class="btn btn-outline" id="stopSoundBtn">■ Stop</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="status" id="alarmStatus">⏰ <strong>Alarm is ON</strong></div>
+    <div class="bedside-card">
+      <p><strong>Bedtime:</strong> plug in your phone, turn the volume up, and start bedside mode. Leave the app open — phones don't let web apps ring once they're closed or locked.</p>
+      <button class="btn btn-gold" id="bedsideBtn">🌙 Start bedside mode</button>
+    </div>
+  </section>
+
+  <!-- SEASON -->
+  <section class="card section">
+    <div class="kicker" id="seasonKicker">The month ahead</div>
+    <h2 id="seasonTitle">This month's verses</h2>
+    <p class="sub" id="seasonSub"></p>
+    <div class="path" id="seasonPath"></div>
+    <div class="week" id="weekRow"></div>
+  </section>
+
+  <!-- HOW + PHOTOS -->
+  <section class="section split">
+    <figure class="photo" style="margin:0">
+      <img id="photoImg" src="" alt="">
+      <figcaption><strong id="photoTitle">First light, first Word.</strong><br><span id="photoText"></span></figcaption>
+    </figure>
+    <div class="card">
+      <div class="kicker">How your morning goes</div>
+      <h2>Chime, then Scripture</h2>
+      <ol class="steps">
+        <li><span class="num">1</span><div><strong>The chime fades in gently</strong><p>No jarring buzz. A soft chime eases you awake over a few seconds.</p></div></li>
+        <li><span class="num">2</span><div><strong>Today's verse is read aloud</strong><p>Slow and clear, with the reference, so you hear whose word it is.</p></div></li>
+        <li><span class="num">3</span><div><strong>Snooze or rise</strong><p>Need a few more minutes? Snooze replays the chime and verse. Ready? Tap “I'm awake — Amen” and start the day in it.</p></div></li>
+      </ol>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;align-items:center">
+        <img id="sideImg" src="" alt="" style="width:84px;height:84px;border-radius:16px;object-fit:cover;flex:none">
+        <p class="sub" style="flex:1;min-width:180px"><span id="sideVerseT"></span><br><b style="color:var(--ink)" id="sideVerseR"></b></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIBRARY -->
+  <section class="card section">
+    <div class="kicker">Verse library</div>
+    <h2>Every verse this month</h2>
+    <p class="sub" id="librarySub"></p>
+    <input class="search" id="searchInput" type="search" placeholder="Search verses…" aria-label="Search verses" style="margin-top:14px">
+    <div class="verse-list" id="verseList"></div>
+  </section>
+
+  <p class="footer"><span id="packFooter"></span><br>Daily Verse Alarm · Heartstrings Studio · <span id="packVersion"></span></p>
+</div>
+
+<!-- BEDSIDE CLOCK -->
+<div class="bedside" id="bedside" role="dialog" aria-label="Bedside clock">
+  <div class="bclock" id="bClock">--:--</div>
+  <div class="bnext" id="bNext"></div>
+  <div class="bwarn" id="bWarn">⚠️ This phone may still lock the screen. Set Auto-Lock to “Never” tonight, or keep it plugged in.</div>
+  <div class="bhint">Tap anywhere to leave bedside mode · keep the volume up</div>
+</div>
+
+<!-- RINGING -->
+<div class="overlay" id="ringOverlay" role="dialog" aria-modal="true" aria-label="Alarm ringing">
+  <img id="overlayImg" src="" alt="">
+  <div class="overlay-inner">
+    <div class="pulse">🕯️</div>
+    <div style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:#FFD88A">Good morning — it's time to wake up</div>
+    <div class="timebig" id="ringTime">6:30 AM</div>
+    <blockquote id="ringText">“…”</blockquote>
+    <cite id="ringRef">—</cite>
+    <p id="ringStatus" style="opacity:.9;font-size:14.5px;margin:12px 0 0">Playing your chime, then reading today's verse…</p>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px">
+      <button class="btn btn-gold" id="dismissBtn" style="min-height:52px;padding:0 22px;font-size:16px">☀️ I'm awake — Amen</button>
+      <button class="btn btn-white" id="snoozeBtn" style="min-height:52px">Snooze <span id="snoozeLabel">9</span> min</button>
+      <button class="btn btn-ghost" id="replayBtn" style="min-height:52px">↻ Hear verse again</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status">Alarm set</div>
+<audio id="chimeAudio" preload="auto" src="sounds/chime.mp3"></audio>
+<audio id="bellsAudio" preload="auto" src="sounds/bells.mp3"></audio>
+<audio id="verseAudio" preload="auto"></audio>
+
+<script src="app.js"></script>
+</body>
+</html>
